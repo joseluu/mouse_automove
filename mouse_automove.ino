@@ -1,5 +1,5 @@
-// # this example is using the library https://github.com/T-vK/ESP32-BLE-Mouse
-// Go to https://github.com/T-vK/ESP32-BLE-Mouse.
+// # this example is using the library https://github.com/joseluu/ESP32-BLE-Mouse
+// Go to ghttps://github.com/joseluu/ESP32-BLE-Mouse.
 // Click the green Code button and select Download ZIP.
 // Save the ZIP file to your computer.
 // Install the Library in Arduino IDE:
@@ -16,7 +16,9 @@
 
 #include <BleMouse.h>
 
-BleMouse bleMouse("Mouse Jose");
+std::string name = "Mouse Automove";
+
+BleMouse bleMouse(name);
 
 class MySecurity : public BLESecurityCallbacks
 {
