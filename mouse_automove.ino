@@ -14,9 +14,20 @@
 
 // a good generic BLE tutorial is available here: https://randomnerdtutorials.com/esp32-bluetooth-low-energy-ble-arduino-ide/
 
+// IMPORTANT:
+// USE ESP32 2.0.17  !!!  in the arduino IDE  go to tools -> Board: -> boardmanager 
+// then type esp32  and install esp32 by espressif Systems version 2.0.17
+// does not work with 3.x !!!
+//
+// under Windows 11, open the dialog "Bluetooth & Devices" and do "Add device"
+// the mouse will simply appear as Mouse
+
+#include <esp_log.h>
 #include <BleMouse.h>
 
-std::string name = "Mouse Automove";
+static const char* LOG_TAG = "MyESP32Mouse";
+
+std::string name = "Mouse";
 
 BleMouse bleMouse(name);
 
@@ -28,7 +39,7 @@ class MySecurity : public BLESecurityCallbacks
 
   uint32_t onPassKeyRequest()
   {
-        ESP_LOGI(LOG_TAG, "PassKeyRequest");
+    ESP_LOGI(LOG_TAG, "PassKeyRequest");
     return 123456;
   }
 
@@ -45,7 +56,7 @@ class MySecurity : public BLESecurityCallbacks
 
   void onAuthenticationComplete(esp_ble_auth_cmpl_t cmpl)
   {
-    ESP_LOGI(LOG_TAG, "Starting BLE work!");
+    ESP_LOGI(LOG_TAG, "Authent done let's have BLE work!");
     if(cmpl.success)
     {
       uint16_t length;
@@ -57,6 +68,10 @@ class MySecurity : public BLESecurityCallbacks
 
 void setup() {
   Serial.begin(115200);
+  esp_log_level_set(LOG_TAG, ESP_LOG_DEBUG); // Set log level to INFO
+  delay(1000); // Small delay to ensure Serial is ready
+  ESP_LOGI(LOG_TAG, "log: ESP32 initialized successfully!");
+
   Serial.println("Starting BLE work!");
   bleMouse.begin();
 
