@@ -15,9 +15,12 @@
 // a good generic BLE tutorial is available here: https://randomnerdtutorials.com/esp32-bluetooth-low-energy-ble-arduino-ide/
 
 // IMPORTANT:
-// USE ESP32 2.0.17  !!!  in the arduino IDE  go to tools -> Board: -> boardmanager 
-// then type esp32  and install esp32 by espressif Systems version 2.0.17
-// does not work with 3.x !!!
+// Works with esp32 (by Espressif Systems) version 3.2
+// make sure you have selected the proper board
+// if serial messages in the serial monitor becomes garbled it means that the 
+// selected board does not have the same xtal frequency as the actual board
+// Heltec Wifi Kit 32 has a 26MHz xtal
+// TTGO Lora32-OLED has a 40MHz xtal
 //
 // under Windows 11, open the dialog "Bluetooth & Devices" and do "Add device"
 // the mouse will simply appear as Mouse
